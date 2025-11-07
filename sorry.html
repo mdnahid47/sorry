@@ -1,0 +1,483 @@
+ <!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Sorry</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 90%;
+      animation: fadeInScale 1s ease-out;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .title {
+      font-size: 48px;
+      color: #1e3c72;
+      margin: 0 0 20px 0;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .subtitle {
+      font-size: 32px;
+      color: #7e22ce;
+      margin: 0 0 30px 0;
+      font-style: italic;
+    }
+
+    .message {
+      font-size: 20px;
+      color: #333;
+      line-height: 1.8;
+      margin: 30px 0;
+      padding: 0 20px;
+    }
+
+    .closing {
+      font-size: 24px;
+      color: #1e3c72;
+      margin-top: 30px;
+      font-style: italic;
+    }
+
+    .heart {
+      display: inline-block;
+      color: #e91e63;
+      font-size: 32px;
+      animation: heartbeat 1.5s ease-in-out infinite;
+      margin: 20px 0;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(1); }
+    }
+
+    .rose {
+      position: absolute;
+      animation: float 15s infinite ease-in-out;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-30px) rotate(5deg);
+      }
+      50% {
+        transform: translateY(-60px) rotate(-5deg);
+      }
+      75% {
+        transform: translateY(-30px) rotate(3deg);
+      }
+    }
+
+    .rose1 { top: 10%; left: 10%; animation-delay: 0s; animation-duration: 12s; }
+    .rose2 { top: 20%; right: 15%; animation-delay: 2s; animation-duration: 14s; }
+    .rose3 { bottom: 15%; left: 20%; animation-delay: 4s; animation-duration: 13s; }
+    .rose4 { bottom: 20%; right: 10%; animation-delay: 1s; animation-duration: 15s; }
+    .rose5 { top: 50%; left: 5%; animation-delay: 3s; animation-duration: 16s; }
+    .rose6 { top: 60%; right: 8%; animation-delay: 5s; animation-duration: 14s; }
+
+    .petal {
+      position: absolute;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        top: -10%;
+        opacity: 1;
+      }
+      100% {
+        top: 110%;
+        opacity: 0.3;
+      }
+    }
+
+    .petal1 { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+    .petal2 { left: 30%; animation-duration: 10s; animation-delay: 2s; }
+    .petal3 { left: 50%; animation-duration: 9s; animation-delay: 4s; }
+    .petal4 { left: 70%; animation-duration: 11s; animation-delay: 1s; }
+    .petal5 { left: 90%; animation-duration: 8.5s; animation-delay: 3s; }
+
+    .corner-rose {
+      position: absolute;
+      z-index: 5;
+      opacity: 0.8;
+    }
+
+    .top-left {
+      top: 20px;
+      left: 20px;
+      animation: gentleRotate 20s infinite ease-in-out;
+    }
+
+    .top-right {
+      top: 20px;
+      right: 20px;
+      animation: gentleRotate 22s infinite ease-in-out reverse;
+    }
+
+    .bottom-left {
+      bottom: 20px;
+      left: 20px;
+      animation: gentleRotate 24s infinite ease-in-out;
+    }
+
+    .bottom-right {
+      bottom: 20px;
+      right: 20px;
+      animation: gentleRotate 21s infinite ease-in-out reverse;
+    }
+
+    @keyframes gentleRotate {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(10deg) scale(1.05); }
+    }
+
+    .content-rose-top {
+      margin-bottom: 20px;
+      animation: roseGlow 3s infinite ease-in-out;
+    }
+
+    .content-rose-bottom {
+      margin-top: 20px;
+      animation: roseGlow 3s infinite ease-in-out 1.5s;
+    }
+
+    @keyframes roseGlow {
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container"><!-- Floating Roses -->
+   <svg class="rose rose1" width="80" height="80" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="-8" cy="25" rx="8" ry="5" fill="#43a047" opacity="0.8" />
+     <ellipse cx="10" cy="30" rx="7" ry="4" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg>
+   <svg class="rose rose2" width="70" height="70" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="-8" cy="25" rx="8" ry="5" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg>
+   <svg class="rose rose3" width="75" height="75" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="10" cy="30" rx="7" ry="4" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg>
+   <svg class="rose rose4" width="65" height="65" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="-8" cy="25" rx="8" ry="5" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg>
+   <svg class="rose rose5" width="70" height="70" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="10" cy="30" rx="7" ry="4" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg>
+   <svg class="rose rose6" width="68" height="68" viewbox="0 0 100 100"><g transform="translate(50,50)">
+     <ellipse cx="0" cy="0" rx="15" ry="20" fill="#e91e63" opacity="0.9" />
+     <ellipse cx="-10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="10" cy="-5" rx="12" ry="18" fill="#c2185b" opacity="0.8" />
+     <ellipse cx="-8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <ellipse cx="8" cy="8" rx="10" ry="15" fill="#ad1457" opacity="0.7" />
+     <circle cx="0" cy="0" r="6" fill="#880e4f" />
+     <rect x="-2" y="15" width="4" height="30" fill="#2e7d32" rx="2" />
+     <ellipse cx="-8" cy="25" rx="8" ry="5" fill="#43a047" opacity="0.8" />
+    </g>
+   </svg><!-- Falling Petals -->
+   <svg class="petal petal1" width="30" height="30" viewbox="0 0 50 50"><ellipse cx="25" cy="25" rx="12" ry="18" fill="#e91e63" opacity="0.6" transform="rotate(20 25 25)" />
+   </svg>
+   <svg class="petal petal2" width="25" height="25" viewbox="0 0 50 50"><ellipse cx="25" cy="25" rx="10" ry="15" fill="#c2185b" opacity="0.5" transform="rotate(-15 25 25)" />
+   </svg>
+   <svg class="petal petal3" width="28" height="28" viewbox="0 0 50 50"><ellipse cx="25" cy="25" rx="11" ry="17" fill="#e91e63" opacity="0.6" transform="rotate(30 25 25)" />
+   </svg>
+   <svg class="petal petal4" width="26" height="26" viewbox="0 0 50 50"><ellipse cx="25" cy="25" rx="10" ry="16" fill="#ad1457" opacity="0.5" transform="rotate(-20 25 25)" />
+   </svg>
+   <svg class="petal petal5" width="27" height="27" viewbox="0 0 50 50"><ellipse cx="25" cy="25" rx="11" ry="16" fill="#e91e63" opacity="0.6" transform="rotate(10 25 25)" />
+   </svg><!-- Decorative Corner Roses -->
+   <svg class="corner-rose top-left" width="120" height="120" viewbox="0 0 120 120"><g transform="translate(60,60)"><!-- Large detailed rose -->
+     <ellipse cx="0" cy="0" rx="20" ry="25" fill="#e91e63" opacity="0.95" />
+     <ellipse cx="-15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="-12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="0" cy="15" rx="12" ry="18" fill="#880e4f" opacity="0.8" />
+     <circle cx="0" cy="0" r="8" fill="#880e4f" />
+     <circle cx="0" cy="0" r="4" fill="#4a0e29" /> <!-- Stem and leaves -->
+     <rect x="-3" y="20" width="6" height="35" fill="#2e7d32" rx="3" />
+     <ellipse cx="-12" cy="30" rx="10" ry="6" fill="#43a047" opacity="0.9" />
+     <ellipse cx="15" cy="38" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+     <ellipse cx="-10" cy="45" rx="8" ry="5" fill="#388e3c" opacity="0.85" />
+    </g>
+   </svg>
+   <svg class="corner-rose top-right" width="120" height="120" viewbox="0 0 120 120"><g transform="translate(60,60)">
+     <ellipse cx="0" cy="0" rx="20" ry="25" fill="#e91e63" opacity="0.95" />
+     <ellipse cx="-15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="-12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="0" cy="15" rx="12" ry="18" fill="#880e4f" opacity="0.8" />
+     <circle cx="0" cy="0" r="8" fill="#880e4f" />
+     <circle cx="0" cy="0" r="4" fill="#4a0e29" />
+     <rect x="-3" y="20" width="6" height="35" fill="#2e7d32" rx="3" />
+     <ellipse cx="-12" cy="30" rx="10" ry="6" fill="#43a047" opacity="0.9" />
+     <ellipse cx="15" cy="38" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+    </g>
+   </svg>
+   <svg class="corner-rose bottom-left" width="120" height="120" viewbox="0 0 120 120"><g transform="translate(60,60)">
+     <ellipse cx="0" cy="0" rx="20" ry="25" fill="#e91e63" opacity="0.95" />
+     <ellipse cx="-15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="-12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="0" cy="15" rx="12" ry="18" fill="#880e4f" opacity="0.8" />
+     <circle cx="0" cy="0" r="8" fill="#880e4f" />
+     <circle cx="0" cy="0" r="4" fill="#4a0e29" />
+     <rect x="-3" y="20" width="6" height="35" fill="#2e7d32" rx="3" />
+     <ellipse cx="-12" cy="30" rx="10" ry="6" fill="#43a047" opacity="0.9" />
+     <ellipse cx="15" cy="38" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+    </g>
+   </svg>
+   <svg class="corner-rose bottom-right" width="120" height="120" viewbox="0 0 120 120"><g transform="translate(60,60)">
+     <ellipse cx="0" cy="0" rx="20" ry="25" fill="#e91e63" opacity="0.95" />
+     <ellipse cx="-15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="15" cy="-8" rx="16" ry="22" fill="#c2185b" opacity="0.9" />
+     <ellipse cx="-12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="12" cy="10" rx="14" ry="20" fill="#ad1457" opacity="0.85" />
+     <ellipse cx="0" cy="15" rx="12" ry="18" fill="#880e4f" opacity="0.8" />
+     <circle cx="0" cy="0" r="8" fill="#880e4f" />
+     <circle cx="0" cy="0" r="4" fill="#4a0e29" />
+     <rect x="-3" y="20" width="6" height="35" fill="#2e7d32" rx="3" />
+     <ellipse cx="-12" cy="30" rx="10" ry="6" fill="#43a047" opacity="0.9" />
+     <ellipse cx="15" cy="38" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+    </g>
+   </svg><!-- Main Content -->
+   <div class="content"><!-- Top Rose Decoration -->
+    <svg class="content-rose-top" width="100" height="100" viewbox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse cx="0" cy="0" rx="18" ry="23" fill="#e91e63" opacity="0.95" />
+      <ellipse cx="-13" cy="-7" rx="15" ry="20" fill="#c2185b" opacity="0.9" />
+      <ellipse cx="13" cy="-7" rx="15" ry="20" fill="#c2185b" opacity="0.9" />
+      <ellipse cx="-10" cy="9" rx="12" ry="18" fill="#ad1457" opacity="0.85" />
+      <ellipse cx="10" cy="9" rx="12" ry="18" fill="#ad1457" opacity="0.85" />
+      <circle cx="0" cy="0" r="7" fill="#880e4f" />
+      <circle cx="0" cy="0" r="3" fill="#4a0e29" />
+      <rect x="-2.5" y="18" width="5" height="25" fill="#2e7d32" rx="2.5" />
+      <ellipse cx="-10" cy="25" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+      <ellipse cx="12" cy="32" rx="8" ry="4" fill="#43a047" opacity="0.9" />
+     </g>
+    </svg>
+    <h1 class="title" id="main-title">I'm Sorry Esha</h1>
+    <h2 class="subtitle" id="subtitle">Please Come Back</h2>
+    <div class="heart">
+     ❤️
+    </div>
+    <p class="message" id="message-text">Esha, I miss you so much and I can't stop thinking about you. I know I made mistakes, and I'm truly sorry for hurting you. You mean everything to me, and I promise to do better. Please give me another chance to make things right.</p>
+    <div class="heart">
+     💕
+    </div>
+    <p class="closing" id="closing-text">With all my love, always</p><!-- Bottom Rose Decoration -->
+    <svg class="content-rose-bottom" width="100" height="100" viewbox="0 0 100 100"><g transform="translate(50,50)">
+      <ellipse cx="0" cy="0" rx="18" ry="23" fill="#e91e63" opacity="0.95" />
+      <ellipse cx="-13" cy="-7" rx="15" ry="20" fill="#c2185b" opacity="0.9" />
+      <ellipse cx="13" cy="-7" rx="15" ry="20" fill="#c2185b" opacity="0.9" />
+      <ellipse cx="-10" cy="9" rx="12" ry="18" fill="#ad1457" opacity="0.85" />
+      <ellipse cx="10" cy="9" rx="12" ry="18" fill="#ad1457" opacity="0.85" />
+      <circle cx="0" cy="0" r="7" fill="#880e4f" />
+      <circle cx="0" cy="0" r="3" fill="#4a0e29" />
+      <rect x="-2.5" y="18" width="5" height="25" fill="#2e7d32" rx="2.5" />
+      <ellipse cx="-10" cy="25" rx="9" ry="5" fill="#43a047" opacity="0.9" />
+      <ellipse cx="12" cy="32" rx="8" ry="4" fill="#43a047" opacity="0.9" />
+     </g>
+    </svg>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "I'm Sorry Esha",
+      subtitle: "Please Come Back",
+      message_text: "Esha, I miss you so much and I can't stop thinking about you. I know I made mistakes, and I'm truly sorry for hurting you. You mean everything to me, and I promise to do better. Please give me another chance to make things right.",
+      closing_text: "With all my love, always",
+      background_color: "#1e3c72",
+      text_color: "#1e3c72",
+      accent_color: "#7e22ce",
+      card_background: "#ffffff",
+      heart_color: "#e91e63"
+    };
+
+    async function onConfigChange(config) {
+      const mainTitle = config.main_title || defaultConfig.main_title;
+      const subtitle = config.subtitle || defaultConfig.subtitle;
+      const messageText = config.message_text || defaultConfig.message_text;
+      const closingText = config.closing_text || defaultConfig.closing_text;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const cardBackground = config.card_background || defaultConfig.card_background;
+
+      document.getElementById('main-title').textContent = mainTitle;
+      document.getElementById('subtitle').textContent = subtitle;
+      document.getElementById('message-text').textContent = messageText;
+      document.getElementById('closing-text').textContent = closingText;
+
+      document.querySelector('.container').style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #2a5298 50%, ${accentColor} 100%)`;
+      document.querySelector('.title').style.color = textColor;
+      document.querySelector('.subtitle').style.color = accentColor;
+      document.querySelector('.closing').style.color = textColor;
+      document.querySelector('.content').style.background = `rgba(255, 255, 255, 0.95)`;
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.card_background || defaultConfig.card_background,
+              set: (value) => {
+                config.card_background = value;
+                window.elementSdk.setConfig({ card_background: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.heart_color || defaultConfig.heart_color,
+              set: (value) => {
+                config.heart_color = value;
+                window.elementSdk.setConfig({ heart_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family || 'Georgia',
+            set: (value) => {
+              config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size || 16,
+            set: (value) => {
+              config.font_size = value;
+              window.elementSdk.setConfig({ font_size: value });
+            }
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle],
+          ["message_text", config.message_text || defaultConfig.message_text],
+          ["closing_text", config.closing_text || defaultConfig.closing_text]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99aea065f00e0645',t:'MTc2MjUzNzM0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
